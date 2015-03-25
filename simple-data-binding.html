@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-ng-app="notesApp">
+<html data-ng-app="notesApp" xmlns="http://www.w3.org/1999/html">
 <head>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
@@ -12,21 +12,56 @@
 <main class="container">
   <form data-ng-submit="ctrl.submit();" name="userForm">
     <div class="row">
-      <div class="form-group">
-        <label>User Name: </label><input type="text" class="form-control" data-ng-model="ctrl.model.user.username"
-                                         placeholder="Please enter your user name." required data-ng-minlength="3" />
-        You typed {{ctrl.model.user.username}}
+      <div class="form-group" data-ng-class="{'has-error' : (userForm.username.$dirty && userForm.username.$invalid)}">
+        <label>User Name: </label><input name="username" type="text" class="form-control"
+                                         data-ng-model="ctrl.model.user.username" placeholder="Please enter your user name."
+                                         required data-ng-minlength="3" data-ng-maxlength="8" />
+        <!--You typed {{ctrl.model.user.username}}-->
+
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.required">
+          This field required.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.minlength">
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username.$dirty && (userForm.username.$error.minlength || userForm.username.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
       </div>
     </div>
     <div class="row">
       <div class="form-group">
-        <label>Password: </label><input data-popover="hello" data-popover-trigger="focus" type="password" class="form-control text-danger" data-ng-model="ctrl.model.user.password"
-                                        placeholder="Please enter your password." required /> You typed {{ctrl.model.user.password}}
+        <label>Password: </label>
+        <input name="password" data-popover="hello" data-popover-trigger="focus" type="password" class="form-control"
+               data-ng-model="ctrl.model.user.password" data-ng-model-options="{ updateOn: 'blur' }"
+               placeholder="Please enter your password." data-blur="false" required data-ng-minlength="5" />
+        You typed {{ctrl.model.user.password}}
+        <span ng-show="userForm.password.$error.required">
+          This field required.
+        </span>
+        <span ng-show="userForm.password.$error.minlength">
+          You need to enter at least 5 characters.
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label>Amount:</label>
+
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <input type="number" class="form-control" data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount." />
+        </div>
+        You typed {{ctrl.model.account.amount}}
       </div>
     </div>
     <div class="row">
       <input type="button" class="btn btn-default" value="Change Values" data-ng-click="ctrl.change();" />
-      <input type="submit" class="btn btn-primary" value="Submit" data-ng-disabled="userForm.$invalid" />
+      <input type="submit" class="btn btn-primary" value="Submit" />
+      <!--data-ng-disabled="userForm.$invalid"-->
     </div>
   </form>
 </main>
@@ -38,22 +73,31 @@
 <script>
   angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
     var _this = this;
+    var scope = userForm.username;
 
     _this.model = {
       user: {
-        username: '',
-        password: ''
+        username: '', password: ''
+      }, account: {
+        amount: 0
       }
-
     };
+
     var _model = _this.model;
 
     _this.change = function () {
+
       _model.user.username = ';-)';
       _model.user.password = ';)';
     };
 
     _this.submit = function () {
+      debugger;
+      if (userForm.username.$error) {
+
+        console.log('error');
+      }
+
       console.log('You submitted the form with values ' + _model.user.username + ' ' + _model.user.password);
     };
   }]);
