@@ -10,18 +10,19 @@
 <body data-ng-controller="MainController as ctrl">
 <header></header>
 <main class="container">
-  <form data-ng-submit="ctrl.submit();" name="userForm">
+  <form data-ng-submit="ctrl.submit();" name="userForm" novalidate>
     <div class="row">
       <div class="form-group" data-ng-class="{'has-error' : (userForm.username.$dirty && userForm.username.$invalid)}">
         <label>User Name: </label><input name="username" type="text" class="form-control"
-                                         data-ng-model="ctrl.model.user.username" placeholder="Please enter your user name."
-                                         required data-ng-minlength="3" data-ng-maxlength="8" />
+                                         data-ng-model="ctrl.model.user.username.text" placeholder="Please enter your user name."
+                                         data-ng-required="{{ctrl.model.user.username.isRequired}}" data-ng-minlength="{{ctrl.model.user.username.minlength}}" data-ng-maxlength="{{ctrl.model.user.username.maxlength}}" />
         <!--You typed {{ctrl.model.user.username}}-->
 
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.required">
-          This field required.
+          {{ctrl.model.messages.required}}
         </span>
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.minlength">
+          {{ctrl.model.messages.minlength}}
           This field should be at least 3 characters long.
         </span>
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.maxlength">
@@ -32,18 +33,19 @@
         </span>
       </div>
     </div>
+
     <div class="row">
-      <div class="form-group">
+      <div class="form-group" data-popover="{{ctrl.model.user.password.message}}">
         <label>Password: </label>
-        <input name="password" data-popover="hello" data-popover-trigger="focus" type="password" class="form-control"
-               data-ng-model="ctrl.model.user.password" data-ng-model-options="{ updateOn: 'blur' }"
-               placeholder="Please enter your password." data-blur="false" required data-ng-minlength="5" />
+        <input name="password" data-popover-trigger="focus" type="password" class="form-control"
+               data-ng-model="ctrl.model.user.password"
+               placeholder="Please enter your password." required data-ng-minlength="3" />
         You typed {{ctrl.model.user.password}}
         <span ng-show="userForm.password.$error.required">
           This field required.
         </span>
         <span ng-show="userForm.password.$error.minlength">
-          You need to enter at least 5 characters.
+          You need to enter at least 3 characters.
         </span>
       </div>
     </div>
@@ -60,8 +62,8 @@
     </div>
     <div class="row">
       <input type="button" class="btn btn-default" value="Change Values" data-ng-click="ctrl.change();" />
-      <input type="submit" class="btn btn-primary" value="Submit" />
-      <!--data-ng-disabled="userForm.$invalid"-->
+      <input type="submit" class="btn btn-primary" value="Submit" data-ng-disabled="userForm.$invalid" />
+
     </div>
   </form>
 </main>
@@ -73,32 +75,46 @@
 <script>
   angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
     var _this = this;
-    var scope = userForm.username;
+
+    // This will be fetched through meta-data.
+    var _messages = {
+      required: 'This field is required',
+      number: 'This field should be a numeric field.',
+      integer: 'This field should be an integer number.',
+      float: 'This field should be an float number.',
+      minlength: 'This field should be at least %1% characters.',
+      maxlength: 'This field should be at least %2% characters.',
+      max: 'The maximum value for this field can be %1%.',
+      min: 'The minimum value for this field can be %1%.',
+      date: 'This should be a valid date field.',
+      pattern: 'This is an incorrect pattern.'
+    };
 
     _this.model = {
       user: {
-        username: '', password: ''
+        username: {
+          text: '',
+          minlength: 3,
+          maxlength: 20,
+          isRequired: true
+        }, password: ''
       }, account: {
         amount: 0
-      }
+      },
+      messages: _messages
     };
 
     var _model = _this.model;
 
     _this.change = function () {
 
-      _model.user.username = ';-)';
-      _model.user.password = ';)';
+      _model.user.username.text = ';-)--|---[';
+      _model.user.password = ';-)';
     };
 
     _this.submit = function () {
-      debugger;
-      if (userForm.username.$error) {
 
-        console.log('error');
-      }
-
-      console.log('You submitted the form with values ' + _model.user.username + ' ' + _model.user.password);
+      console.log('You submitted the form with values ' + _model.user.username.text + ' ' + _model.user.password);
     };
   }]);
 </script>
