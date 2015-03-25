@@ -10,19 +10,22 @@
 <body data-ng-controller="MainController as ctrl">
 <header></header>
 <main class="container">
+
   <form data-ng-submit="ctrl.submit();" name="userForm" novalidate>
     <div class="row">
       <div class="form-group" data-ng-class="{'has-error' : (userForm.username.$dirty && userForm.username.$invalid)}">
         <label>User Name: </label><input name="username" type="text" class="form-control"
                                          data-ng-model="ctrl.model.user.username.text" placeholder="Please enter your user name."
-                                         data-ng-required="{{ctrl.model.user.username.isRequired}}" data-ng-minlength="{{ctrl.model.user.username.minlength}}" data-ng-maxlength="{{ctrl.model.user.username.maxlength}}" />
+                                         data-ng-required="{{ctrl.model.user.username.isRequired}}" data-ng-minlength="{{ctrl.model.user.username.minlength}}" data-ng-maxlength="{{ctrl.model.user.username.maxlength}}"
+                                         data-ng-focus="userForm.username.isFocus = true;"
+          />
         <!--You typed {{ctrl.model.user.username}}-->
 
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.required">
           {{ctrl.model.messages.required}}
         </span>
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.minlength">
-          {{ctrl.model.messages.minlength}}
+
           This field should be at least 3 characters long.
         </span>
         <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.maxlength">
@@ -35,29 +38,49 @@
     </div>
 
     <div class="row">
-      <div class="form-group" data-popover="{{ctrl.model.user.password.message}}">
+      <div class="form-group" data-ng-class="{'has-error' : (userForm.password.$dirty && userForm.password.$invalid)}">
         <label>Password: </label>
-        <input name="password" data-popover-trigger="focus" type="password" class="form-control"
+        <input name="password" data-popover="{{ctrl.errorMessage}}" data-popover-trigger="focus" popover-placement="bottom"
+               type="password" class="form-control"
                data-ng-model="ctrl.model.user.password"
                placeholder="Please enter your password." required data-ng-minlength="3" />
-        You typed {{ctrl.model.user.password}}
-        <span ng-show="userForm.password.$error.required">
-          This field required.
-        </span>
-        <span ng-show="userForm.password.$error.minlength">
-          You need to enter at least 3 characters.
-        </span>
+        <!--You typed {{ctrl.model.user.password}}-->
+
+        <!--<span ng-show="userForm.password.$error.required">-->
+          <!--This is field required.-->
+        <!--</span>-->
+        <!--<span ng-show="userForm.password.$error.minlength">-->
+          <!--You need to enter at least 3 characters.-->
+        <!--</span>-->
+        <alert type="danger" data-ng-show="(userForm.password.$dirty && userForm.password.$invalid)">
+          <span ng-show="userForm.password.$error.required">
+            This is field required.
+          </span>
+          <span ng-show="userForm.password.$error.minlength">
+            You need to enter at least 3 characters.
+          </span>
+        </alert>
       </div>
     </div>
     <div class="row">
-      <div class="form-group">
+      <div class="form-group" data-ng-class="{'has-error' : (userForm.amount.$dirty && userForm.amount.$invalid)}">
         <label>Amount:</label>
 
         <div class="input-group">
           <span class="input-group-addon">$</span>
-          <input type="number" class="form-control" data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount." />
+          <input type="number" name="amount" class="form-control"
+                 tooltip-trigger="focus" tooltip-placement="bottom" tooltip-enable="userForm.amount.$dirty && userForm.amount.$invalid"
+                 tooltip-html-unsafe='<span name="amountError" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">
+          Please enter a valid number.
+        </span>'
+                 data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount." />
         </div>
-        You typed {{ctrl.model.account.amount}}
+        <!--You typed {{ctrl.model.account.amount}}-->
+
+        <!--<span name="amountError" class="help-block" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">-->
+          <!--Please enter a valid number.-->
+        <!--</span>-->
+
       </div>
     </div>
     <div class="row">
@@ -75,6 +98,9 @@
 <script>
   angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
     var _this = this;
+
+    _this.errorMessage = 'This field required. \n' +
+    'You need to enter at least 3 characters.';
 
     // This will be fetched through meta-data.
     var _messages = {
@@ -116,6 +142,7 @@
 
       console.log('You submitted the form with values ' + _model.user.username.text + ' ' + _model.user.password);
     };
+
   }]);
 </script>
 </body>
