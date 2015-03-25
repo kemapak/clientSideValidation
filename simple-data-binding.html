@@ -74,16 +74,29 @@
                  tooltip-html-unsafe='<span name="amountError" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">
           Please enter a valid number.
         </span>'
-                 data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount." />
+                 data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount."
+                 ng-required data-ng-minlength="5" />
         </div>
-        <!--You typed {{ctrl.model.account.amount}}-->
-
-        <!--<span name="amountError" class="help-block" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">-->
-          <!--Please enter a valid number.-->
-        <!--</span>-->
 
       </div>
     </div>
+
+      <div class="row">
+          <div class="form-group" data-ng-class="{'has-error' : (userForm.amount2.$dirty && userForm.amount2.$invalid)}">
+              <label>Amount:</label>
+
+              <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="number" name="amount2" class="form-control"
+                         popover-trigger="focus" popover-placement="bottom"
+                         popover='{{ctrl.getMessages(userForm.amount2)}}'
+                         data-ng-model="ctrl.model.account.amount2" placeholder="Please enter the amount."
+                         required data-ng-maxlength="5" />
+              </div>
+
+          </div>
+      </div>
+
     <div class="row">
       <input type="button" class="btn btn-default" value="Change Values" data-ng-click="ctrl.change();" />
       <input type="submit" class="btn btn-primary" value="Submit" data-ng-disabled="userForm.$invalid" />
@@ -103,7 +116,19 @@
 //    _this.errorMessage = 'This field required. \n' +
 //    'You need to enter at least 3 characters.';
 
-      this.errorMessage = '';
+    _this.getMessages = function(field){
+//        debugger;
+        if ('undefined' != typeof(field) && !field.$valid){
+            if (field.$error.required){
+                return 'Field can\'t be empty.';
+            }
+        else if (field.$error.maxlength){
+        return 'Maximum number of characters can\'t be greater than 5';
+    }
+    }
+    return '';
+    };
+    _this.errorMessage = '';
 
     // This will be fetched through meta-data.
     var _messages = {
@@ -129,7 +154,8 @@
         },
           password: ''
       }, account: {
-        amount: 0
+        amount: 0,
+        amount2: 0
       },
       messages: _messages
     };
