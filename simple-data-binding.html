@@ -62,6 +62,7 @@
         </alert>
       </div>
     </div>
+
     <div class="row">
       <div class="form-group" data-ng-class="{'has-error' : (userForm.amount.$dirty && userForm.amount.$invalid)}">
         <label>Amount:</label>
@@ -99,8 +100,10 @@
   angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
     var _this = this;
 
-    _this.errorMessage = 'This field required. \n' +
-    'You need to enter at least 3 characters.';
+//    _this.errorMessage = 'This field required. \n' +
+//    'You need to enter at least 3 characters.';
+
+      this.errorMessage = '';
 
     // This will be fetched through meta-data.
     var _messages = {
@@ -123,7 +126,8 @@
           minlength: 3,
           maxlength: 20,
           isRequired: true
-        }, password: ''
+        },
+          password: ''
       }, account: {
         amount: 0
       },

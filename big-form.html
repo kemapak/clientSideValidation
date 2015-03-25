@@ -1,0 +1,875 @@
+<!doctype html>
+<html data-ng-app="notesApp" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+
+    <title>Simple Data Binding</title>
+</head>
+<body data-ng-controller="MainController as ctrl">
+<header></header>
+<main class="container">
+
+    <form data-ng-submit="ctrl.submit();" name="userForm" novalidate>
+        <div class="row">
+            <div class="form-group"
+                 data-ng-class="{'has-error' : (userForm.username.$dirty && userForm.username.$invalid)}">
+                <label>User Name: </label><input name="username" type="text" class="form-control"
+                                                 data-ng-model="ctrl.model.user.username.text"
+                                                 placeholder="Please enter your user name."
+                                                 data-ng-required="{{ctrl.model.user.username.isRequired}}"
+                                                 data-ng-minlength="{{ctrl.model.user.username.minlength}}"
+                                                 data-ng-maxlength="{{ctrl.model.user.username.maxlength}}"
+                                                 data-ng-focus="userForm.username.isFocus = true;"
+                    />
+                <!--You typed {{ctrl.model.user.username}}-->
+
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username.$dirty && userForm.username.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username.$dirty && (userForm.username.$error.minlength || userForm.username.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group"
+                 data-ng-class="{'has-error' : (userForm.username2.$dirty && userForm.username2.$invalid)}">
+                <label>User Name: </label><input name="username2" type="text" class="form-control"
+                                                 data-ng-model="ctrl.model.user.username2.text"
+                                                 placeholder="Please enter your user name."
+                                                 data-ng-required="{{ctrl.model.user.username2.isRequired}}"
+                                                 data-ng-minlength="{{ctrl.model.user.username2.minlength}}"
+                                                 data-ng-maxlength="{{ctrl.model.user.username2.maxlength}}"
+                                                 data-ng-focus="userForm.username2.isFocus = true;"
+                    />
+                <!--You typed {{ctrl.model.user.username2}}-->
+
+        <span class="help-block" data-ng-show="userForm.username2.$dirty && userForm.username2.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username2.$dirty && userForm.username2.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username2.$dirty && userForm.username2.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username2.$dirty && (userForm.username2.$error.minlength || userForm.username2.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"
+                 data-ng-class="{'has-error' : (userForm.username3.$dirty && userForm.username3.$invalid)}">
+                <label>User Name: </label><input name="username3" type="text" class="form-control"
+                                                 data-ng-model="ctrl.model.user.username3.text"
+                                                 placeholder="Please enter your user name."
+                                                 data-ng-required="{{ctrl.model.user.username3.isRequired}}"
+                                                 data-ng-minlength="{{ctrl.model.user.username3.minlength}}"
+                                                 data-ng-maxlength="{{ctrl.model.user.username3.maxlength}}"
+                                                 data-ng-focus="userForm.username3.isFocus = true;"
+                    />
+                <!--You typed {{ctrl.model.user.username3}}-->
+
+        <span class="help-block" data-ng-show="userForm.username3.$dirty && userForm.username3.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username3.$dirty && userForm.username3.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username3.$dirty && userForm.username3.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username3.$dirty && (userForm.username3.$error.minlength || userForm.username3.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+            </div>
+        </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username4.$dirty && userForm.username4.$invalid)}">
+            <label>User Name: </label><input name="username4" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username4.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username4.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username4.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username4.maxlength}}"
+                                             data-ng-focus="userForm.username4.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username4}}-->
+
+        <span class="help-block" data-ng-show="userForm.username4.$dirty && userForm.username4.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username4.$dirty && userForm.username4.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username4.$dirty && userForm.username4.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username4.$dirty && (userForm.username4.$error.minlength || userForm.username4.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username5.$dirty && userForm.username5.$invalid)}">
+            <label>User Name: </label><input name="username5" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username5.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username5.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username5.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username5.maxlength}}"
+                                             data-ng-focus="userForm.username5.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username5}}-->
+
+        <span class="help-block" data-ng-show="userForm.username5.$dirty && userForm.username5.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username5.$dirty && userForm.username5.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username5.$dirty && userForm.username5.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username5.$dirty && (userForm.username5.$error.minlength || userForm.username5.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username6.$dirty && userForm.username6.$invalid)}">
+            <label>User Name: </label><input name="username6" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username6.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username6.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username6.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username6.maxlength}}"
+                                             data-ng-focus="userForm.username6.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username6}}-->
+
+        <span class="help-block" data-ng-show="userForm.username6.$dirty && userForm.username6.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username6.$dirty && userForm.username6.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username6.$dirty && userForm.username6.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username6.$dirty && (userForm.username6.$error.minlength || userForm.username6.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username7.$dirty && userForm.username7.$invalid)}">
+            <label>User Name: </label><input name="username7" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username7.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username7.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username7.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username7.maxlength}}"
+                                             data-ng-focus="userForm.username7.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username7}}-->
+
+        <span class="help-block" data-ng-show="userForm.username7.$dirty && userForm.username7.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username7.$dirty && userForm.username7.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username7.$dirty && userForm.username7.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username7.$dirty && (userForm.username7.$error.minlength || userForm.username7.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username8.$dirty && userForm.username8.$invalid)}">
+            <label>User Name: </label><input name="username8" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username8.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username8.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username8.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username8.maxlength}}"
+                                             data-ng-focus="userForm.username8.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username8}}-->
+
+        <span class="help-block" data-ng-show="userForm.username8.$dirty && userForm.username8.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username8.$dirty && userForm.username8.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username8.$dirty && userForm.username8.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username8.$dirty && (userForm.username8.$error.minlength || userForm.username8.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username9.$dirty && userForm.username9.$invalid)}">
+            <label>User Name: </label><input name="username9" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username9.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username9.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username9.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username9.maxlength}}"
+                                             data-ng-focus="userForm.username9.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username9}}-->
+
+        <span class="help-block" data-ng-show="userForm.username9.$dirty && userForm.username9.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username9.$dirty && userForm.username9.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username9.$dirty && userForm.username9.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username9.$dirty && (userForm.username9.$error.minlength || userForm.username9.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username10.$dirty && userForm.username10.$invalid)}">
+            <label>User Name: </label><input name="username10" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username10.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username10.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username10.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username10.maxlength}}"
+                                             data-ng-focus="userForm.username10.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username10}}-->
+
+        <span class="help-block" data-ng-show="userForm.username10.$dirty && userForm.username10.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username10.$dirty && userForm.username10.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username10.$dirty && userForm.username10.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username10.$dirty && (userForm.username10.$error.minlength || userForm.username10.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username11.$dirty && userForm.username11.$invalid)}">
+            <label>User Name: </label><input name="username11" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username11.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username11.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username11.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username11.maxlength}}"
+                                             data-ng-focus="userForm.username11.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username11}}-->
+
+        <span class="help-block" data-ng-show="userForm.username11.$dirty && userForm.username11.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username11.$dirty && userForm.username11.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username11.$dirty && userForm.username11.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username11.$dirty && (userForm.username11.$error.minlength || userForm.username11.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username12.$dirty && userForm.username12.$invalid)}">
+            <label>User Name: </label><input name="username12" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username12.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username12.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username12.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username12.maxlength}}"
+                                             data-ng-focus="userForm.username12.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username12}}-->
+
+        <span class="help-block" data-ng-show="userForm.username12.$dirty && userForm.username12.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username12.$dirty && userForm.username12.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username12.$dirty && userForm.username12.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username12.$dirty && (userForm.username12.$error.minlength || userForm.username12.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username13.$dirty && userForm.username13.$invalid)}">
+            <label>User Name: </label><input name="username13" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username13.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username13.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username13.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username13.maxlength}}"
+                                             data-ng-focus="userForm.username13.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username13}}-->
+
+        <span class="help-block" data-ng-show="userForm.username13.$dirty && userForm.username13.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username13.$dirty && userForm.username13.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username13.$dirty && userForm.username13.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username13.$dirty && (userForm.username13.$error.minlength || userForm.username13.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username14.$dirty && userForm.username14.$invalid)}">
+            <label>User Name: </label><input name="username14" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username14.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username14.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username14.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username14.maxlength}}"
+                                             data-ng-focus="userForm.username14.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username14}}-->
+
+        <span class="help-block" data-ng-show="userForm.username14.$dirty && userForm.username14.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username14.$dirty && userForm.username14.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username14.$dirty && userForm.username14.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username14.$dirty && (userForm.username14.$error.minlength || userForm.username14.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username15.$dirty && userForm.username15.$invalid)}">
+            <label>User Name: </label><input name="username15" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username15.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username15.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username15.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username15.maxlength}}"
+                                             data-ng-focus="userForm.username15.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username15}}-->
+
+        <span class="help-block" data-ng-show="userForm.username15.$dirty && userForm.username15.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username15.$dirty && userForm.username15.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username15.$dirty && userForm.username15.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username15.$dirty && (userForm.username15.$error.minlength || userForm.username15.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username16.$dirty && userForm.username16.$invalid)}">
+            <label>User Name: </label><input name="username16" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username16.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username16.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username16.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username16.maxlength}}"
+                                             data-ng-focus="userForm.username16.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username16}}-->
+
+        <span class="help-block" data-ng-show="userForm.username16.$dirty && userForm.username16.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username16.$dirty && userForm.username16.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username16.$dirty && userForm.username16.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username16.$dirty && (userForm.username16.$error.minlength || userForm.username16.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username17.$dirty && userForm.username17.$invalid)}">
+            <label>User Name: </label><input name="username17" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username17.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username17.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username17.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username17.maxlength}}"
+                                             data-ng-focus="userForm.username17.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username17}}-->
+
+        <span class="help-block" data-ng-show="userForm.username17.$dirty && userForm.username17.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username17.$dirty && userForm.username17.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username17.$dirty && userForm.username17.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username17.$dirty && (userForm.username17.$error.minlength || userForm.username17.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username18.$dirty && userForm.username18.$invalid)}">
+            <label>User Name: </label><input name="username18" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username18.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username18.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username18.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username18.maxlength}}"
+                                             data-ng-focus="userForm.username18.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username18}}-->
+
+        <span class="help-block" data-ng-show="userForm.username18.$dirty && userForm.username18.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username18.$dirty && userForm.username18.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username18.$dirty && userForm.username18.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username18.$dirty && (userForm.username18.$error.minlength || userForm.username18.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username19.$dirty && userForm.username19.$invalid)}">
+            <label>User Name: </label><input name="username19" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username19.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username19.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username19.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username19.maxlength}}"
+                                             data-ng-focus="userForm.username19.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username19}}-->
+
+        <span class="help-block" data-ng-show="userForm.username19.$dirty && userForm.username19.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username19.$dirty && userForm.username19.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username19.$dirty && userForm.username19.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username19.$dirty && (userForm.username19.$error.minlength || userForm.username19.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username20.$dirty && userForm.username20.$invalid)}">
+            <label>User Name: </label><input name="username20" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username20.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username20.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username20.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username20.maxlength}}"
+                                             data-ng-focus="userForm.username20.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username20}}-->
+
+        <span class="help-block" data-ng-show="userForm.username20.$dirty && userForm.username20.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username20.$dirty && userForm.username20.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username20.$dirty && userForm.username20.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username20.$dirty && (userForm.username20.$error.minlength || userForm.username20.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username21.$dirty && userForm.username21.$invalid)}">
+            <label>User Name: </label><input name="username21" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username21.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username21.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username21.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username21.maxlength}}"
+                                             data-ng-focus="userForm.username21.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username21}}-->
+
+        <span class="help-block" data-ng-show="userForm.username21.$dirty && userForm.username21.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username21.$dirty && userForm.username21.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username21.$dirty && userForm.username21.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username21.$dirty && (userForm.username21.$error.minlength || userForm.username21.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div><div class="row">
+        <div class="form-group"
+             data-ng-class="{'has-error' : (userForm.username22.$dirty && userForm.username22.$invalid)}">
+            <label>User Name: </label><input name="username22" type="text" class="form-control"
+                                             data-ng-model="ctrl.model.user.username22.text"
+                                             placeholder="Please enter your user name."
+                                             data-ng-required="{{ctrl.model.user.username22.isRequired}}"
+                                             data-ng-minlength="{{ctrl.model.user.username22.minlength}}"
+                                             data-ng-maxlength="{{ctrl.model.user.username22.maxlength}}"
+                                             data-ng-focus="userForm.username22.isFocus = true;"
+                />
+            <!--You typed {{ctrl.model.user.username22}}-->
+
+        <span class="help-block" data-ng-show="userForm.username22.$dirty && userForm.username22.$error.required">
+          {{ctrl.model.messages.required}}
+        </span>
+        <span class="help-block" data-ng-show="userForm.username22.$dirty && userForm.username22.$error.minlength">
+
+          This field should be at least 3 characters long.
+        </span>
+        <span class="help-block" data-ng-show="userForm.username22.$dirty && userForm.username22.$error.maxlength">
+          This field should be at most 8 characters long.
+        </span>
+        <span class="help-block"
+              data-ng-show="userForm.username22.$dirty && (userForm.username22.$error.minlength || userForm.username22.$error.maxlength)">
+          This field should be between 3 to 8 characters long.
+        </span>
+        </div>
+    </div>
+
+
+
+        <div class="row">
+            <div class="form-group"
+                 data-ng-class="{'has-error' : (userForm.password.$dirty && userForm.password.$invalid)}">
+                <label>Password: </label>
+                <input name="password" data-popover="{{ctrl.errorMessage}}" data-popover-trigger="focus"
+                       popover-placement="bottom"
+                       type="password" class="form-control"
+                       data-ng-model="ctrl.model.user.password"
+                       placeholder="Please enter your password." required data-ng-minlength="3"/>
+                <!--You typed {{ctrl.model.user.password}}-->
+
+                <!--<span ng-show="userForm.password.$error.required">-->
+                <!--This is field required.-->
+                <!--</span>-->
+                <!--<span ng-show="userForm.password.$error.minlength">-->
+                <!--You need to enter at least 3 characters.-->
+                <!--</span>-->
+                <alert type="danger" data-ng-show="(userForm.password.$dirty && userForm.password.$invalid)">
+          <span ng-show="userForm.password.$error.required">
+            This is field required.
+          </span>
+          <span ng-show="userForm.password.$error.minlength">
+            You need to enter at least 3 characters.
+          </span>
+                </alert>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group"
+                 data-ng-class="{'has-error' : (userForm.amount.$dirty && userForm.amount.$invalid)}">
+                <label>Amount:</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input type="number" name="amount" class="form-control"
+                           tooltip-trigger="focus" tooltip-placement="bottom"
+                           tooltip-enable="userForm.amount.$dirty && userForm.amount.$invalid"
+                           tooltip-html-unsafe='<span name="amountError" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">
+          Please enter a valid number.
+        </span>'
+                           data-ng-model="ctrl.model.account.amount" placeholder="Please enter the amount."/>
+                </div>
+                <!--You typed {{ctrl.model.account.amount}}-->
+
+                <!--<span name="amountError" class="help-block" data-ng-show="userForm.amount.$dirty && userForm.amount.$error.number">-->
+                <!--Please enter a valid number.-->
+                <!--</span>-->
+
+            </div>
+        </div>
+        <div class="row">
+            <input type="button" class="btn btn-default" value="Change Values" data-ng-click="ctrl.change();"/>
+            <input type="submit" class="btn btn-primary" value="Submit" data-ng-disabled="userForm.$invalid"/>
+
+        </div>
+    </form>
+</main>
+<footer>
+
+</footer>
+
+
+<script>
+    angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
+        var _this = this;
+
+//    _this.errorMessage = 'This field required. \n' +
+//    'You need to enter at least 3 characters.';
+
+        this.errorMessage = '';
+
+        // This will be fetched through meta-data.
+        var _messages = {
+            required: 'This field is required',
+            number: 'This field should be a numeric field.',
+            integer: 'This field should be an integer number.',
+            float: 'This field should be an float number.',
+            minlength: 'This field should be at least %1% characters.',
+            maxlength: 'This field should be at least %2% characters.',
+            max: 'The maximum value for this field can be %1%.',
+            min: 'The minimum value for this field can be %1%.',
+            date: 'This should be a valid date field.',
+            pattern: 'This is an incorrect pattern.'
+        };
+
+        _this.model = {
+            user: {
+                username: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username2: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username3: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username4: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username5: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username6: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username7: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username8: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username9: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username10: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username11: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username12: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username13: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username14: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username15: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username16: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username17: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username18: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username19: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username20: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+                username21: {
+                    text: '',
+                    minlength: 3,
+                    maxlength: 20,
+                    isRequired: true
+                },
+
+                password: ''
+            }, account: {
+                amount: 0
+            },
+            messages: _messages
+        };
+
+        var _model = _this.model;
+
+        _this.change = function () {
+
+            _model.user.username.text = ';-)--|---[';
+            _model.user.password = ';-)';
+        };
+
+        _this.submit = function () {
+
+            console.log('You submitted the form with values ' + _model.user.username.text + ' ' + _model.user.password);
+        };
+
+    }]);
+</script>
+</body>
+</html>
