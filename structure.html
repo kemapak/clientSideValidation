@@ -1,0 +1,84 @@
+<!doctype html>
+<html data-ng-app="structureApp">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+    <title>Form Structure</title>
+</head>
+
+
+<body class="container">
+....
+
+<section data-ng-controller="ExampleController as exampleController">
+
+    <form name="exampleForm"
+          class="form-horizontal"
+          data-ng-submit="exampleController.submit();"
+          novalidate>
+
+        <div class="row">
+            <div class="form-group">
+                <label>{{ctrl.labels.user.name}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
+                <input name="name" type="text" class="form-control"
+                       data-ng-model="exampleController.model.user.name"
+                       placeholder="{{exampleController.placeholders.name}}"
+                       data-ng-required="{{exampleController.metadata.user.name.isDepRequired}}"
+                       data-ng-minlength="{{exampleController.metadata.user.name.minLength}}"
+                       data-ng-maxlength="{{exampleController.metadata.user.name.maxLength}}"
+                       data-ng-pattern="{{exampleController.metadata.user.name.pattern}}" />
+                <div data-ng-show="{{exampleController.isBackendValidation}}">
+                    <span class="help-block" data-ng-repeat>
+                        {{ctrl.errorMessages}}
+                        <!--TODO KEM create the model structure for backend validation message structure.(may client side too) -->
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>{{ctrl.labels.user.username}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
+
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                    <input name="name" type="text" class="form-control"
+                           data-ng-model="exampleController.model.user.username"
+                           placeholder="{{exampleController.placeholders.username}}"
+                           data-ng-required="{{exampleController.metadata.user.username.isDepRequired}}"
+                           data-ng-minlength="{{exampleController.metadata.user.username.minLength}}"
+                           data-ng-maxlength="{{exampleController.metadata.user.username.maxLength}}"
+                           data-ng-pattern="{{exampleController.metadata.user.username.pattern}}" />
+                     <span class="input-group-btn">
+                         <button type="button" class="btn btn-default">
+                             <span class="glyphicon glyphicon-ok"></span>
+                         </button>
+                     </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label>{{ctrl.labels.user.age}}</label>
+                <input name="name" type="number" class="form-control"
+                       data-ng-model="exampleController.model.user.age"
+                       placeholder="{{exampleController.placeholders.age}}"
+                       data-ng-required="{{exampleController.metadata.user.age.isDepRequired}}"
+                       data-ng-min="{{exampleController.metadata.user.name.minLength}}" />
+            </div>
+        </div>
+
+    </form>
+</section>
+
+<!--
+This is an example all the JavaScript code should be in separate files.
+For more information please read the coding standards, styles and patterns document.
+-->
+<script>
+
+</script>
+</body>
+</html>

@@ -14,10 +14,14 @@
   <form data-ng-submit="ctrl.submit();" name="userForm" novalidate>
     <div class="row">
       <div class="form-group" data-ng-class="{'has-error' : (userForm.username.$dirty && userForm.username.$invalid)}">
-        <label>User Name: </label><input name="username" type="text" class="form-control"
-                                         data-ng-model="ctrl.model.user.username.text" placeholder="Please enter your user name."
-                                         data-ng-required="{{ctrl.model.user.username.isRequired}}" data-ng-minlength="{{ctrl.model.user.username.minlength}}" data-ng-maxlength="{{ctrl.model.user.username.maxlength}}"
-                                         data-ng-focus="userForm.username.isFocus = true;"
+        <label>User Name: <span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
+        <input name="username" type="text" class="form-control"
+               data-ng-model="ctrl.model.user.username.text"
+               placeholder="Please enter your user name."
+               data-ng-required="{{ctrl.model.user.username.isRequired}}"
+               data-ng-minlength="{{ctrl.model.user.username.minlength}}"
+               data-ng-maxlength="{{ctrl.model.user.username.maxlength}}"
+               data-ng-focus="userForm.username.isFocus = true;"
           />
         <!--You typed {{ctrl.model.user.username}}-->
 
@@ -91,7 +95,7 @@
                          popover-trigger="focus" popover-placement="bottom"
                          popover='{{ctrl.getMessages(userForm.amount2)}}'
                          data-ng-model="ctrl.model.account.amount2" placeholder="Please enter the amount."
-                         required data-ng-maxlength="5" />
+                         required data-ng-minlength="2" data-ng-maxlength="5" />
               </div>
 
           </div>
@@ -112,19 +116,26 @@
 <script>
   angular.module('notesApp', ['ui.bootstrap']).controller('MainController', [function () {
     var _this = this;
+    var message = '';
 
 //    _this.errorMessage = 'This field required. \n' +
 //    'You need to enter at least 3 characters.';
 
     _this.getMessages = function(field){
 //        debugger;
-        if ('undefined' != typeof(field) && !field.$valid){
-            if (field.$error.required){
-                return 'Field can\'t be empty.';
-            }
-        else if (field.$error.maxlength){
-        return 'Maximum number of characters can\'t be greater than 5';
-    }
+    if ('undefined' != typeof(field) && !field.$valid){
+        message = '\n';
+        if (field.$error.required) {
+            message += 'Field can\'t be empty.\n';
+        } if (field.$error.number) {
+            message += 'Field must a numeric.\n';
+        } if (field.$error.minlength){
+            message += 'Maximum number of characters can\'t be less than 2\n';
+        } if (field.$error.maxlength) {
+            message += 'Maximum number of characters can\'t be greater than 5\n';
+        }
+
+        return message;
     }
     return '';
     };
