@@ -9,7 +9,8 @@
 
 
 <body class="container">
-....
+
+<br>
 
 <section data-ng-controller="ExampleController as exampleController">
 
@@ -20,17 +21,18 @@
 
         <div class="row">
             <div class="form-group">
-                <label>{{ctrl.labels.user.name}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
-                <input name="name" type="text" class="form-control"
-                       data-ng-model="exampleController.model.user.name"
-                       placeholder="{{exampleController.placeholders.name}}"
-                       data-ng-required="{{exampleController.metadata.user.name.isDepRequired}}"
-                       data-ng-minlength="{{exampleController.metadata.user.name.minLength}}"
-                       data-ng-maxlength="{{exampleController.metadata.user.name.maxLength}}"
-                       data-ng-pattern="{{exampleController.metadata.user.name.pattern}}" />
+                <label class="control-label col-md-2">{{exampleController.metadata.user.name.label}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
+	            <div class="input-group col-md-6">
+	                <input name="name" type="text" class="form-control"
+	                       data-ng-model="exampleController.metadata.user.name.text"
+	                       placeholder="{{exampleController.metadata.user.name.placeholders}}"
+	                       data-ng-required="{{exampleController.metadata.user.name.isRequired}}"
+	                       data-ng-minlength="{{exampleController.metadata.user.name.minLength}}"
+	                       data-ng-maxlength="{{exampleController.metadata.user.name.maxLength}}"
+	                       data-ng-pattern="{{exampleController.metadata.user.name.pattern}}" />
+		        </div>
                 <div data-ng-show="{{exampleController.isBackendValidation}}">
-                    <span class="help-block" data-ng-repeat>
-                        {{ctrl.errorMessages}}
+                    <span class="help-block">
                         <!--TODO KEM create the model structure for backend validation message structure.(may client side too) -->
                     </span>
                 </div>
@@ -39,14 +41,14 @@
 
         <div class="row">
             <div class="form-group">
-                <label>{{ctrl.labels.user.username}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
+                <label class="control-label col-md-2">{{exampleController.metadata.user.username.label}}<span class="glyphicon glyphicon-asterisk small text-danger"></span></label>
 
-                <div class="input-group">
+                <div class="input-group col-md-6">
                     <span class="input-group-addon">@</span>
-                    <input name="name" type="text" class="form-control"
+                    <input name="username" type="text" class="form-control"
                            data-ng-model="exampleController.model.user.username"
                            placeholder="{{exampleController.placeholders.username}}"
-                           data-ng-required="{{exampleController.metadata.user.username.isDepRequired}}"
+                           data-ng-required="{{exampleController.metadata.user.username.isRequired}}"
                            data-ng-minlength="{{exampleController.metadata.user.username.minLength}}"
                            data-ng-maxlength="{{exampleController.metadata.user.username.maxLength}}"
                            data-ng-pattern="{{exampleController.metadata.user.username.pattern}}" />
@@ -61,12 +63,14 @@
 
         <div class="row">
             <div class="form-group">
-                <label>{{ctrl.labels.user.age}}</label>
-                <input name="name" type="number" class="form-control"
-                       data-ng-model="exampleController.model.user.age"
-                       placeholder="{{exampleController.placeholders.age}}"
-                       data-ng-required="{{exampleController.metadata.user.age.isDepRequired}}"
-                       data-ng-min="{{exampleController.metadata.user.name.minLength}}" />
+                <label class="control-label col-md-2">{{exampleController.metadata.user.age.label}}</label>
+	            <div class="input-group col-md-6">
+	                <input name="name" type="number" class="form-control"
+	                       data-ng-model="exampleController.model.user.age"
+	                       placeholder="{{exampleController.metadata.user.age.placeholder}}"
+	                       data-ng-required="{{exampleController.metadata.user.age.isRequired}}"
+	                       data-ng-min="{{exampleController.metadata.user.name.minLength}}" />
+	            </div>
             </div>
         </div>
 
@@ -79,6 +83,97 @@ For more information please read the coding standards, styles and patterns docum
 -->
 <script>
 
+    angular.module('structureApp', ['ui.bootstrap']).controller('ExampleController', [function () {
+
+	    var _this = this;
+
+	    _this.labels = {};
+	    _this.metadata = {};
+		_this.model = {};
+
+		var message = '';
+
+
+		// This method should be moved to a utility class.
+		_this.getMessages = function(field){
+
+			message = '';
+
+			if ('undefined' != typeof(field) && !field.$valid){
+
+				if (field.$error.required) {
+					message += 'Field can\'t be empty.\n';
+				} if (field.$error.number) {
+					message += 'Field must a numeric.\n';
+				} if (field.$error.minlength){
+					message += 'Maximum number of characters can\'t be less than 2\n';
+				} if (field.$error.maxlength) {
+					message += 'Maximum number of characters can\'t be greater than 5\n';
+				}
+			}
+			return message;
+		};
+
+		// This will be fetched through meta-data.
+		var _messages = {
+			required: 'This field is required',
+			number: 'This field should be a numeric field.',
+			integer: 'This field should be an integer number.',
+			float: 'This field should be an float number.',
+			minlength: 'This field should be at least %1% characters.',
+			maxlength: 'This field should be at least %2% characters.',
+			max: 'The maximum value for this field can be %1%.',
+			min: 'The minimum value for this field can be %1%.',
+			date: 'This should be a valid date field.',
+			pattern: 'This is an incorrect pattern.'
+		};
+
+		_this.metadata = {
+			user: {
+				name: {
+					label: 'name',
+					text: '',
+					placeholder: 'Please enter your name.',
+					isRequired: true,
+					minlength: 2,
+					maxlength: 20,
+					pattern: '/^[a-zA-Z ]*$/'
+				},
+				username: {
+					label: 'username',
+					text: '',
+					placeholder: 'Please enter your username.',
+					isRequired: true,
+					minlength: 3,
+					maxlength: 10,
+					pattern: '/^[a-z0-9_-]*$/'
+				},
+				age:{
+					label: 'age',
+					text: '',
+					placeholder: 'Please enter your age.',
+					isRequired: false,
+					min: 18
+				}
+		}, account: {
+		amount: 0,
+		amount2: 0
+		},
+		messages: _messages
+		};
+
+
+
+		_this.change = function () {
+
+
+		};
+
+		_this.submit = function () {
+
+//			console.log('You submitted the form with values ' + _model.user.username.text + ' ' + _model.user.password);
+		};
+    }]);
 </script>
 </body>
 </html>
